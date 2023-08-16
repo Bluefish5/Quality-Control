@@ -31,13 +31,11 @@
 
         <StackPanel Grid.Column="1">
 
-            <Label>Tabla wartosci:</Label>
-            <ListBoxItem>asd</ListBoxItem>
+           
+            
             <Label>Robot:</Label>
-            <Label>animacja</Label>
-            <Label>Wykers:</Label>
-            <Button>Zapis do pliku</Button>
-            <Button>Wyczyść wykres</Button>
+            <Image Source="/assets/main_sensors.png" Height="200" Width="200"></Image>
+            <Image Source="/assets/encoders.png" Height="150" Width="150"></Image>
 
         </StackPanel>
 
@@ -67,15 +65,9 @@
             </Grid>
             <Label>Sygnał wejściowy</Label>
             <Label>Silnik 1</Label>
-            <ProgressBar></ProgressBar>
+            <ProgressBar Height="20"></ProgressBar>
             <Label>Silnik 2</Label>
-            <ProgressBar></ProgressBar>
-
-            <Label>Testy:</Label>
-            <Button>Test Silnikow</Button>
-            <Button>Test czujników odległości</Button>
-            <Button>Test enkoderów</Button>
-            <Button>Test czujników koloru</Button>
+            <ProgressBar Height="20"></ProgressBar>
 
 
         </StackPanel>
