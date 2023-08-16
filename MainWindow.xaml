@@ -17,14 +17,66 @@
             
             <Label>Wybierz port:</Label>
             <ComboBox> </ComboBox>
+            <Button>Zatwierdz</Button>
+            <Label>Aktualnie wybrany port:</Label>
+            <Label>port1</Label>
+            <Label>Stan połączenia:</Label>
+            <Label>połączono</Label>
+            <Button>Pobierz podjencyzny pakiet</Button>
+            <Button>Włącz komunikacje</Button>
+            <Label>Surowy pakiet:</Label>
+            <TextBlock>{123:23}</TextBlock>
             
         </StackPanel>
 
         <StackPanel Grid.Column="1">
 
+            <Label>Tabla wartosci:</Label>
+            <ListBoxItem>asd</ListBoxItem>
+            <Label>Robot:</Label>
+            <Label>animacja</Label>
+            <Label>Wykers:</Label>
+            <Button>Zapis do pliku</Button>
+            <Button>Wyczyść wykres</Button>
+
         </StackPanel>
 
         <StackPanel Grid.Column="2">
+            <Label>wybierz sposób sterowania:</Label>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0">starter</Label>
+                <Label Grid.Row="0" Grid.Column="1">kontroler</Label>
+                <Label Grid.Row="0" Grid.Column="2">klawiatura</Label>
+
+                <RadioButton Grid.Row="1" Grid.Column="0"></RadioButton>
+                <RadioButton Grid.Row="1" Grid.Column="1"></RadioButton>
+                <RadioButton Grid.Row="1" Grid.Column="2"></RadioButton>
+
+
+
+            </Grid>
+            <Label>Sygnał wejściowy</Label>
+            <Label>Silnik 1</Label>
+            <ProgressBar></ProgressBar>
+            <Label>Silnik 2</Label>
+            <ProgressBar></ProgressBar>
+
+            <Label>Testy:</Label>
+            <Button>Test Silnikow</Button>
+            <Button>Test czujników odległości</Button>
+            <Button>Test enkoderów</Button>
+            <Button>Test czujników koloru</Button>
+
 
         </StackPanel>
     </Grid>
