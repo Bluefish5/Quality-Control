@@ -46,11 +46,13 @@
                 
             </Grid>
             <Label>Surowy pakiet:</Label>
-            <TextBlock x:Name="rawData">{123:23}</TextBlock>
 
+            <TextBlock x:Name="rawData" TextWrapping="Wrap">{123:23}</TextBlock>
 
 
         </StackPanel>
+        
+        
 
         <StackPanel Grid.Column="1" >
 
@@ -77,12 +79,12 @@
                     <ImageBrush ImageSource="assets/main_sensors.png"></ImageBrush>
                 </Grid.Background>
 
-                <TextBlock Grid.Column="0" Grid.Row="0" Width="40" Height="40" Background="DarkGreen">on</TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="0" Width="40" Height="40" Background="DarkGreen">on</TextBlock>
-                <TextBlock Grid.Column="2" Grid.Row="0" Width="40" Height="40" Background="DarkGreen">on</TextBlock>
-                <TextBlock Grid.Column="3" Grid.Row="0" Width="40" Height="40" Background="DarkGreen">on</TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="3" Width="40" Height="40" Background="white">white</TextBlock>
-                <TextBlock Grid.Column="3" Grid.Row="3" Width="40" Height="40" Background="white">white</TextBlock>
+                <TextBlock x:Name="distanceSensorDisplay1" Grid.Column="0" Grid.Row="0" Width="40" Height="40" Background="DarkGreen" Margin="10,8,25,27" TextAlignment="Center"  >on</TextBlock>
+                <TextBlock x:Name="distanceSensorDisplay2" Grid.Column="1" Grid.Row="0" Width="40" Height="40" Background="DarkGreen" Margin="15,7,20,28" TextAlignment="Center">on</TextBlock>
+                <TextBlock x:Name="distanceSensorDisplay3" Grid.Column="2" Grid.Row="0" Width="40" Height="40" Background="DarkGreen" Margin="22,7,13,28" TextAlignment="Center">on</TextBlock>
+                <TextBlock x:Name="distanceSensorDisplay4" Grid.Column="3" Grid.Row="0" Width="40" Height="40" Background="DarkGreen" Margin="28,8,7,27" TextAlignment="Center">on</TextBlock>
+                <TextBlock x:Name="colorSensorDisplay1" Grid.Column="0" Grid.Row="3" Width="40" Height="40" Background="white" Margin="10,25,25,10" TextAlignment="Center">white</TextBlock>
+                <TextBlock x:Name="colorSensorDisplay2" Grid.Column="3" Grid.Row="3" Width="40" Height="40" Background="white" Margin="28,25,7,10" TextAlignment="Center">white</TextBlock>
 
             </Grid>
                 
@@ -121,7 +123,7 @@
             <ProgressBar Height="20"></ProgressBar>
             <Label>Silnik 2</Label>
             <ProgressBar Height="20"></ProgressBar>
-            <Label>Legenda:</Label>
+            
 
         </StackPanel>
     </Grid>
