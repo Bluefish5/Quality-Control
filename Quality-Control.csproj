@@ -9,7 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="assets\" />
+    <None Remove="assets\main_sensors.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="assets\main_sensors.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.IO.Ports" Version="7.0.0" />
   </ItemGroup>
 
 </Project>

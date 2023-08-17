@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,39 @@ namespace Quality_Control
     /// </summary>
     public partial class MainWindow : Window
     {
+        public SerialPort serialPort;
         public MainWindow()
         {
+            serialPort = new SerialPort();
             InitializeComponent();
+            InitializeSerialPorts();
+        }
+
+        private void InitializeSerialPorts()
+        {
+
+            string[] ports = SerialPort.GetPortNames();
+            foreach (var port in ports)
+            {
+                portSelectionBox.Items.Add(port);
+            }
+            
+        }
+
+        private void openSerialPort(object sender, RoutedEventArgs e)
+        {
+            serialPort.PortName = portSelectionBox.Text;
+            serialPort.Open();
+            selectedPort.Content = serialPort.PortName;
+            connectionState.Content = "połączono";
+            communicationState.Content = "nie nawiązano";
+        }
+
+        private void getPacket(object sender, RoutedEventArgs e)
+        {
+            serialPort.Write("?");
+            rawData.Text = serialPort.ReadExisting();
+            communicationState.Content = "pobrano Pakiet";
         }
     }
 }

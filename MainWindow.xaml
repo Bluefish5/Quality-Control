@@ -5,42 +5,95 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Quality_Control"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="550" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0">
-            
-            <Label>Wybierz port:</Label>
-            <ComboBox> </ComboBox>
-            <Button>Zatwierdz</Button>
-            <Label>Aktualnie wybrany port:</Label>
-            <Label>port1</Label>
-            <Label>Stan połączenia:</Label>
-            <Label>połączono</Label>
-            <Button>Pobierz podjencyzny pakiet</Button>
-            <Button>Włącz komunikacje</Button>
+
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0">Wybierz port:</Label>
+                <ComboBox x:Name="portSelectionBox" Grid.Row="1" Grid.Column="0" ></ComboBox>
+                <Button x:Name="openSerialPortButton" Grid.Row="1" Grid.Column="1" Click="openSerialPort">Zatwierdz</Button>
+                <Label Grid.Row="2" Grid.Column="0">Wybrany port:</Label>
+                <Label x:Name="selectedPort" Grid.Row="2" Grid.Column="1">brak</Label>
+                <Label Grid.Row="3" Grid.Column="0">Stan połączenia:</Label>
+                <Label x:Name="connectionState" Grid.Row="3" Grid.Column="1">brak</Label>
+                <Label Grid.Row="4" Grid.Column="0">komunikacja:</Label>
+                <Label x:Name="communicationState" Grid.Row="4" Grid.Column="1">brak</Label>
+                <Button Grid.Row="5" Grid.Column="0" Click="getPacket">Pobierz podjencyzny pakiet</Button>
+                <Button Grid.Row="5" Grid.Column="1">Włącz komunikacje</Button>
+                
+            </Grid>
             <Label>Surowy pakiet:</Label>
-            <TextBlock>{123:23}</TextBlock>
-            
+            <TextBlock x:Name="rawData">{123:23}</TextBlock>
+
+
+
         </StackPanel>
 
-        <StackPanel Grid.Column="1">
+        <StackPanel Grid.Column="1" >
 
            
             
             <Label>Robot:</Label>
-            <Image Source="/assets/main_sensors.png" Height="200" Width="200"></Image>
-            <Image Source="/assets/encoders.png" Height="150" Width="150"></Image>
+
+            <Grid Width="300" Height="300">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <Grid.Background>
+                    <ImageBrush ImageSource="assets/main_sensors.png"></ImageBrush>
+                </Grid.Background>
+
+                <TextBlock Grid.Column="0" Grid.Row="0" Width="40" Height="40" Background="DarkGreen">on</TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="0" Width="40" Height="40" Background="DarkGreen">on</TextBlock>
+                <TextBlock Grid.Column="2" Grid.Row="0" Width="40" Height="40" Background="DarkGreen">on</TextBlock>
+                <TextBlock Grid.Column="3" Grid.Row="0" Width="40" Height="40" Background="DarkGreen">on</TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="3" Width="40" Height="40" Background="white">white</TextBlock>
+                <TextBlock Grid.Column="3" Grid.Row="3" Width="40" Height="40" Background="white">white</TextBlock>
+
+            </Grid>
+                
+            
+            
+            
 
         </StackPanel>
 
         <StackPanel Grid.Column="2">
-            <Label>wybierz sposób sterowania:</Label>
+            <Label>Wybierz sposób sterowania:</Label>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -52,23 +105,23 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="0" Grid.Column="0">starter</Label>
-                <Label Grid.Row="0" Grid.Column="1">kontroler</Label>
-                <Label Grid.Row="0" Grid.Column="2">klawiatura</Label>
+                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" >starter</Label>
+                <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" >kontroler</Label>
+                <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" >klawiatura</Label>
 
-                <RadioButton Grid.Row="1" Grid.Column="0"></RadioButton>
-                <RadioButton Grid.Row="1" Grid.Column="1"></RadioButton>
-                <RadioButton Grid.Row="1" Grid.Column="2"></RadioButton>
+                <RadioButton Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" ></RadioButton>
+                <RadioButton Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" ></RadioButton>
+                <RadioButton Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" ></RadioButton>
 
 
 
             </Grid>
-            <Label>Sygnał wejściowy</Label>
+            <Label>Sygnał wejściowy:</Label>
             <Label>Silnik 1</Label>
             <ProgressBar Height="20"></ProgressBar>
             <Label>Silnik 2</Label>
             <ProgressBar Height="20"></ProgressBar>
-
+            <Label>Legenda:</Label>
 
         </StackPanel>
     </Grid>
