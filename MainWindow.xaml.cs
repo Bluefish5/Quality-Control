@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,9 +29,35 @@ namespace Quality_Control
 
         public MainWindow()
         {
+            appData = new AppData();
             serialPort = new SerialPort();
             InitializeComponent();
             InitializeSerialPorts();
+
+
+            /*Thread thread = new Thread(keyboardInterupt);
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();*/
+        }
+
+        public void keyboardInterupt()
+        {
+            while(true)
+            {
+                Thread.Sleep(40);
+                if (Keyboard.GetKeyStates(Key.Down) > 0)
+                {
+                    appData.motorOutput1 += 1;
+                    motorOutputDisplay1.Value += 1;
+
+                }
+                else
+                {
+                    appData.motorOutput1 -= 1;
+                    motorOutputDisplay1.Value -= 1;
+                }
+                //motorOutputDisplay1.Value = appData.motorOutput1;
+            }
         }
 
         private void InitializeSerialPorts()
@@ -146,6 +173,10 @@ namespace Quality_Control
         public string distanceSensor4 { get; set; }
         public string colorSensor1 { get; set; }
         public string colorSensor2 { get; set; }
+
+        public int motorOutput1 { get; set; }   
+
+        public int motorOutput2 { get; set; }
         public AppData()
         {
             distanceSensor1 = string.Empty;
@@ -154,6 +185,8 @@ namespace Quality_Control
             distanceSensor4 = string.Empty;
             colorSensor1 = string.Empty;
             colorSensor2 = string.Empty;
+            motorOutput1 = 0;
+            motorOutput2 = 0;
 
         }
     }
