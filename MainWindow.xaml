@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Quality_Control"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="900"
+        KeyDown="keyboardHandler"
+        Title="Quality Control" Height="550" Width="900"
         Background="Transparent">
     <Border Background="#1e2124">
 

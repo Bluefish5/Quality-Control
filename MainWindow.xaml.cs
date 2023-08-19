@@ -40,24 +40,19 @@ namespace Quality_Control
             thread.Start();*/
         }
 
-        public void keyboardInterupt()
+        public void keyboardHandler(object slander, KeyEventArgs e)
         {
-            while(true)
+            switch (e.Key)
             {
-                Thread.Sleep(40);
-                if (Keyboard.GetKeyStates(Key.Down) > 0)
-                {
-                    appData.motorOutput1 += 1;
-                    motorOutputDisplay1.Value += 1;
-
-                }
-                else
-                {
-                    appData.motorOutput1 -= 1;
-                    motorOutputDisplay1.Value -= 1;
-                }
-                //motorOutputDisplay1.Value = appData.motorOutput1;
-            }
+                case Key.Up:
+                    appData.motorOutput1 += 10;
+                    motorOutputDisplay1.Value += 10;
+                    break;
+                case Key.Down:
+                    appData.motorOutput1 -= 10;
+                    motorOutputDisplay1.Value -= 10;
+                    break;
+            }   
         }
 
         private void InitializeSerialPorts()
