@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Quality_Control"
         mc:Ignorable="d"
         KeyDown="keyboardHandler"
-        Title="Quality Control" Height="600" Width="900"
+        Title="Quality Control" Height="620" Width="900"
         Background="Transparent">
     <Border Background="#26292B">
 
@@ -56,15 +56,87 @@
                         <Label x:Name="connectionState" Grid.Row="3" Grid.Column="1" Style="{StaticResource Label}">brak</Label>
                         </Grid>
                         </Border>
-                        
-                        <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource Label}">komunikacja:</Label>
-                        <Label x:Name="communicationState" Grid.Row="4" Grid.Column="1" Style="{StaticResource Label}">brak</Label>
-                        <Button Style="{StaticResource Button}" Grid.Row="5" Height="30" Grid.Column="0" Click="getPacket" Margin="5,0">Pobierz podjencyzny pakiet</Button>
-                        <Button Style="{StaticResource Button}" Grid.Row="5" Height="30" Grid.Column="1" Margin="5,0">Włącz komunikacje</Button>
-                        
-                        
-
                     
+                    <Border Margin="0,10" CornerRadius="10">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Color="#5F7ADB" Offset="0.25" />
+                                <GradientStop Color="#A2B2EE" Offset="0.75" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+
+
+                        <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Style="{StaticResource Label}">Komunikacja:</Label>
+                        
+                        <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource Button}"  Height="30" Click="getPacket" Margin="5,0">Pobierz podjencyzny pakiet</Button>
+                        <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource Button}"  Height="30" Margin="5,0">Włącz komunikacje</Button>
+
+                        <Label Grid.Column="0" Grid.Row="2" Style="{StaticResource Label}">Stan komunikacji:</Label>
+                        <Label Grid.Column="1" Grid.Row="2"  x:Name="communicationState" Style="{StaticResource Label}">Brak</Label>
+
+                    </Grid>
+                    </Border>
+
+                    <Border CornerRadius="10">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Color="#5F7ADB" Offset="0.25" />
+                                <GradientStop Color="#A2B2EE" Offset="0.75" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource Title}" Grid.ColumnSpan="2">Wartości robota:</Label>
+
+
+                            <Label Grid.Column="0" Grid.Row="1" Style="{StaticResource Label}">Bateria:</Label>
+                            <Label Grid.Column="1" Grid.Row="1" Style="{StaticResource Label}">0V / 0%</Label>
+
+                            <Label Grid.Column="0" Grid.Row="2" Style="{StaticResource Label}">Temperatura:</Label>
+                            <Label Grid.Column="1" Grid.Row="2" Style="{StaticResource Label}">0C°</Label>
+
+
+
+                        </Grid>
+                        
+                    </Border>
+
+                    <Border CornerRadius="10" Margin="0,10">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Color="#5F7ADB" Offset="0.25" />
+                                <GradientStop Color="#A2B2EE" Offset="0.75" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+
+                        <StackPanel>
+                            <Label Style="{StaticResource Label}">Surowy pakiet:</Label>
+                            <TextBlock Margin="10" x:Name="rawData" TextWrapping="Wrap" Foreground="White">{123:23}</TextBlock>
+                        </StackPanel>
+                    </Border>
+
 
 
                 </StackPanel>
@@ -72,7 +144,19 @@
 
 
             <Border Grid.Column="1" Grid.Row="1" BorderBrush="Silver" BorderThickness="1">
-                <StackPanel Margin="10,20">
+                <StackPanel Margin="10,10">
+
+                    <Border CornerRadius="10">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Color="#5F7ADB" Offset="0.25" />
+                                <GradientStop Color="#A2B2EE" Offset="0.75" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <StackPanel>
+
+                        <Label Style="{StaticResource Title}">Czujniki:</Label>
+                    
                     
                     <Grid Width="400" Height="400">
                     <Grid.ColumnDefinitions>
@@ -89,26 +173,31 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    
-                    <Grid.Background>
-                        <ImageBrush ImageSource="assets/main_sensors.png"></ImageBrush>
-                    </Grid.Background>
+                        <Rectangle Margin="0,0,0,10" Height="400" Width="400"  Grid.RowSpan="4" Grid.ColumnSpan="4"  RadiusX="20" RadiusY="20">
+                            
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="assets/sensors.png"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                            
+                            
+                        
 
-                    <TextBlock x:Name="distanceSensorDisplay1" Grid.Column="0" Grid.Row="0" Width="40" Height="40" Background="DarkGreen" Margin="10,8,25,27" TextAlignment="Center"  >on</TextBlock>
-                    <TextBlock x:Name="distanceSensorDisplay2" Grid.Column="1" Grid.Row="0" Width="40" Height="40" Background="DarkGreen" Margin="15,7,20,28" TextAlignment="Center">on</TextBlock>
-                    <TextBlock x:Name="distanceSensorDisplay3" Grid.Column="2" Grid.Row="0" Width="40" Height="40" Background="DarkGreen" Margin="22,7,13,28" TextAlignment="Center">on</TextBlock>
-                    <TextBlock x:Name="distanceSensorDisplay4" Grid.Column="3" Grid.Row="0" Width="40" Height="40" Background="DarkGreen" Margin="28,8,7,27" TextAlignment="Center">on</TextBlock>
-                    <TextBlock x:Name="colorSensorDisplay1" Grid.Column="0" Grid.Row="3" Width="40" Height="40" Background="white" Margin="10,25,25,10" TextAlignment="Center">white</TextBlock>
-                    <TextBlock x:Name="colorSensorDisplay2" Grid.Column="3" Grid.Row="3" Width="40" Height="40" Background="white" Margin="28,25,7,10" TextAlignment="Center">white</TextBlock>
+
+                        <TextBox x:Name="distanceSensorDisplay1" Grid.Column="0" Grid.Row="0"  Margin="20,18,35,37" Style="{StaticResource SensorDispaly}">on</TextBox>
+                        <TextBox x:Name="distanceSensorDisplay2" Grid.Column="1" Grid.Row="0"  Margin="28,18,28,37" Style="{StaticResource SensorDispaly}" >on</TextBox>
+                        <TextBox x:Name="distanceSensorDisplay3" Grid.Column="2" Grid.Row="0"   Margin="33,18,22,37" Style="{StaticResource SensorDispaly}" >on</TextBox>
+                        <TextBox x:Name="distanceSensorDisplay4" Grid.Column="3" Grid.Row="0"  Margin="38,18,17,37" Style="{StaticResource SensorDispaly}" >on</TextBox>
+                        <TextBox x:Name="colorSensorDisplay1" Grid.Column="0" Grid.Row="3"   Margin="22,38,32,17" Style="{StaticResource SensorDispaly}" >white</TextBox>
+                        <TextBox x:Name="colorSensorDisplay2" Grid.Column="3" Grid.Row="3"  Margin="38,38,18,17" Style="{StaticResource SensorDispaly}" >white</TextBox>
 
                 </Grid>
-                
+                </StackPanel>
+                    </Border>
 
+                    
 
-                <Label Style="{StaticResource Label}">Surowy pakiet:</Label>
-                <TextBlock x:Name="rawData" TextWrapping="Wrap" Foreground="White">{123:23}</TextBlock>
-
-            </StackPanel>
+                </StackPanel>
                 </Border>
 
             <Border Margin="0,0,0,0" Grid.Column="2" Grid.Row="1" BorderBrush="Silver" BorderThickness="1">
@@ -180,7 +269,20 @@
                     </StackPanel>
                     </Border>
 
-                    <Image Source="/assets/qr.png" Height="180" Width="180"></Image>
+                    <Border CornerRadius="10">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0.1,0.5" EndPoint="0.7,0">
+                                <GradientStop Color="#5F7ADB" Offset="0.25" />
+                                <GradientStop Color="#A2B2EE" Offset="0.75" />
+
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <StackPanel>
+                            <Label Style="{StaticResource Title}">Repozytorum:</Label>
+                            <Image Source="/assets/qr.png" Height="150" Width="150"></Image>
+                            <Label Style="{StaticResource Label}">https://github.com/Bluefish5/Quality-Control</Label>
+                        </StackPanel>
+                    </Border>
 
 
                 </StackPanel>
