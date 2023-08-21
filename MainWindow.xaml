@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:Quality_Control"
         mc:Ignorable="d"
         KeyDown="keyboardHandler"
-        Title="Quality Control" Height="550" Width="900"
+        Title="Quality Control" Height="600" Width="900"
         Background="Transparent">
-    <Border Background="#1e2124">
+    <Border Background="#26292B">
 
         <Grid>
             
@@ -22,54 +22,65 @@
                 <RowDefinition/>
 
             </Grid.RowDefinitions>
-            
 
-            <StackPanel Grid.Column="0" Grid.Row="1" Margin="10,10">
+            <Border  Grid.Column="0" Grid.Row="1" BorderBrush="Silver"  BorderThickness="1">
+                <StackPanel Margin="10,10">
 
+                    <Border CornerRadius="10">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Color="#5F7ADB" Offset="0.25" />
+                                <GradientStop Color="#A2B2EE" Offset="0.75" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource Label}">Wybierz port:</Label>
+                        <ComboBox x:Name="portSelectionBox" Grid.Row="1" Grid.Column="0" Margin="5,0"></ComboBox>
+                        <Button Style="{StaticResource Button}" x:Name="openSerialPortButton" Grid.Row="1" Height="30" Grid.Column="1" Click="openSerialPort" Margin="5,0">Zatwierdz</Button>
+                        <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource Label}" >Wybrany port:</Label>
+                        <Label x:Name="selectedPort" Grid.Row="2" Grid.Column="1" Style="{StaticResource Label}">brak</Label>
+                        <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource Label}">Stan połączenia:</Label>
+                        <Label x:Name="connectionState" Grid.Row="3" Grid.Column="1" Style="{StaticResource Label}">brak</Label>
+                        </Grid>
+                        </Border>
+                        
+                        <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource Label}">komunikacja:</Label>
+                        <Label x:Name="communicationState" Grid.Row="4" Grid.Column="1" Style="{StaticResource Label}">brak</Label>
+                        <Button Style="{StaticResource Button}" Grid.Row="5" Height="30" Grid.Column="0" Click="getPacket" Margin="5,0">Pobierz podjencyzny pakiet</Button>
+                        <Button Style="{StaticResource Button}" Grid.Row="5" Height="30" Grid.Column="1" Margin="5,0">Włącz komunikacje</Button>
+                        
+                        
 
-                    </Grid.RowDefinitions>
                     
-                    
-
-                    <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource Label}">Wybierz port:</Label>
-                    <ComboBox x:Name="portSelectionBox" Grid.Row="1" Grid.Column="0" Margin="5,0"></ComboBox>
-                    <Button Style="{StaticResource Button}" x:Name="openSerialPortButton" Grid.Row="1" Height="30" Grid.Column="1" Click="openSerialPort" Margin="5,0">Zatwierdz</Button>
-                    <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource Label}" >Wybrany port:</Label>
-                    <Label x:Name="selectedPort" Grid.Row="2" Grid.Column="1" Style="{StaticResource Label}">brak</Label>
-                    <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource Label}">Stan połączenia:</Label>
-                    <Label x:Name="connectionState" Grid.Row="3" Grid.Column="1" Style="{StaticResource Label}">brak</Label>
-                    <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource Label}">komunikacja:</Label>
-                    <Label x:Name="communicationState" Grid.Row="4" Grid.Column="1" Style="{StaticResource Label}">brak</Label>
-                    <Button Grid.Row="5" Height="30" Grid.Column="0" Click="getPacket" Margin="5,0">Pobierz podjencyzny pakiet</Button>
-                    <Button Grid.Row="5" Height="30" Grid.Column="1" Margin="5,0">Włącz komunikacje</Button>
-
-                </Grid>
 
 
-            </StackPanel>
+                </StackPanel>
+            </Border>
 
 
-
-            <StackPanel Grid.Column="1" Grid.Row="1" Margin="10,10">
+            <Border Grid.Column="1" Grid.Row="1" BorderBrush="Silver" BorderThickness="1">
+                <StackPanel Margin="10,10">
 
 
 
 
                 <Label Style="{StaticResource Label}">Robot:</Label>
 
+                
+                    
                 <Grid Width="400" Height="400">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -85,6 +96,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
+                    
                     <Grid.Background>
                         <ImageBrush ImageSource="assets/main_sensors.png"></ImageBrush>
                     </Grid.Background>
@@ -97,58 +109,89 @@
                     <TextBlock x:Name="colorSensorDisplay2" Grid.Column="3" Grid.Row="3" Width="40" Height="40" Background="white" Margin="28,25,7,10" TextAlignment="Center">white</TextBlock>
 
                 </Grid>
+                
+
 
                 <Label Style="{StaticResource Label}">Surowy pakiet:</Label>
-                <TextBlock x:Name="rawData" TextWrapping="Wrap">{123:23}</TextBlock>
+                <TextBlock x:Name="rawData" TextWrapping="Wrap" Foreground="White">{123:23}</TextBlock>
 
             </StackPanel>
+                </Border>
 
-            <StackPanel Grid.Column="2" Grid.Row="1" Margin="10,10">
-                <Label Style="{StaticResource Label}">Wybierz sposób sterowania:</Label>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+            <Border Margin="0,0,0,0" Grid.Column="2" Grid.Row="1" BorderBrush="Silver" BorderThickness="1">
+                <StackPanel   Margin="10,10">
+                    <Border CornerRadius="10">
+                        <Border.Background>
+                        <LinearGradientBrush StartPoint="1,0.5" EndPoint="0.1,1">
+                                <GradientStop Color="#5F7ADB" Offset="0.25" />
+                                <GradientStop Color="#A2B2EE" Offset="0.75" />
+                            
+                        </LinearGradientBrush>
+                        </Border.Background>
+                        <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Margin="5" Grid.ColumnSpan="3" Style="{StaticResource Title}">Wybierz sposób sterowania:</Label>
 
-                    <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Style="{StaticResource Label}">starter</Label>
-                    <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource Label}">kontroler</Label>
-                    <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Style="{StaticResource Label}">klawiatura</Label>
 
-                    <RadioButton Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" ></RadioButton>
-                    <RadioButton Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" ></RadioButton>
-                    <RadioButton Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" ></RadioButton>
+                        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Style="{StaticResource Label}">starter</Label>
+                        <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource Label}">kontroler</Label>
+                        <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Style="{StaticResource Label}">klawiatura</Label>
+
+                        <RadioButton Margin="10" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" ></RadioButton>
+                        <RadioButton Margin="10" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" ></RadioButton>
+                        <RadioButton Margin="10" IsChecked="True" Grid.Row="2"  Grid.Column="2" HorizontalAlignment="Center" ></RadioButton>
 
 
 
-                </Grid>
-                <Label Style="{StaticResource Label}">Sygnał wejściowy:</Label>
-                <Slider Maximum="1" Minimum="0" Value="1" ></Slider>
-                <WrapPanel>
-                    <Label Style="{StaticResource Label}">Silnik 1</Label>
-                    <CheckBox  VerticalAlignment="Center"></CheckBox>
-                </WrapPanel>
-                <ProgressBar x:Name="motorOutputDisplay1" Height="20" Minimum="0" Maximum="200"></ProgressBar>
-                <WrapPanel>
-                    <Label Style="{StaticResource Label}">Silnik 2</Label>
-                    <CheckBox  VerticalAlignment="Center"></CheckBox>
-                </WrapPanel>
-                <ProgressBar Height="20"></ProgressBar>
+                    </Grid>
+                    </Border>
 
-                <StackPanel Margin="5,10">
-                    <Button Height="30" Margin="5">Test rozpędzania</Button>
-                    <Button Height="30" Margin="5">Test skrętności</Button>
+                    
+                    <Border CornerRadius="10" Margin="0,10">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0.1,0.5" EndPoint="0.7,0">
+                                <GradientStop Color="#5F7ADB" Offset="0.25" />
+                                <GradientStop Color="#A2B2EE" Offset="0.75" />
+
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <StackPanel>
+                    <Label Style="{StaticResource Label}">Sygnał wejściowy:</Label>
+                    <Slider Margin="10,0" Maximum="1" Minimum="0" Value="1" ></Slider>
+                    <WrapPanel>
+                        <Label Style="{StaticResource Label}">Silnik 1</Label>
+                        <CheckBox  VerticalAlignment="Center"  IsChecked="True" ></CheckBox>
+                    </WrapPanel>
+                    <ProgressBar Margin="10,0" x:Name="motorOutputDisplay1" Height="20" Minimum="0" Maximum="200"></ProgressBar>
+                    <WrapPanel>
+                        <Label Style="{StaticResource Label}">Silnik 2</Label>
+                        <CheckBox  VerticalAlignment="Center"  IsChecked="True"></CheckBox>
+                    </WrapPanel>
+                        <ProgressBar Margin="10,0" Height="20"></ProgressBar>
+
+                    <StackPanel Margin="5,10">
+                        <Button Style="{StaticResource Button}" Height="30" Margin="5">Test rozpędzania</Button>
+                        <Button Style="{StaticResource Button}" Height="30" Margin="5">Test skrętności</Button>
+
+
+                    </StackPanel>
+                    </StackPanel>
+                    </Border>
+
+                    <Image Source="/assets/qr.png" Height="180" Width="180"></Image>
 
 
                 </StackPanel>
-
-
-            </StackPanel>
+            </Border>
         </Grid>
     </Border>
 </Window>

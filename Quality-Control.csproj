@@ -11,13 +11,14 @@
   <ItemGroup>
     <None Remove="Assets\backgraund.jpg" />
     <None Remove="Assets\main_sensors.png" />
+    <None Remove="Assets\qr.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Assets\backgraund.jpg">
+    <Content Include="Assets\main_sensors.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\main_sensors.png">
+    <Content Include="Assets\qr.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

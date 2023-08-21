@@ -5,9 +5,15 @@
         <Setter Property="Foreground" Value="#fefefc"/>
     </Style>
 
-    <Style TargetType="Button" x:Key="Button">
-        <Setter Property="Background" Value="#ff4948"/>
+    <Style TargetType="Label" x:Key="Title">
         <Setter Property="Foreground" Value="#fefefc"/>
+        <Setter Property="FontWeight" Value="Black"/>
+    </Style>
+
+    <Style TargetType="Button" x:Key="Button">
+        <Setter Property="Background" Value="#F0EC8B"/>
+        <Setter Property="Foreground" Value="Black"/>
+        
 
     </Style>
     
