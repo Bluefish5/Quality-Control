@@ -77,32 +77,45 @@ namespace Quality_Control
 
         private void getPacket(object sender, RoutedEventArgs e)
         {
-            /*serialPort.Write("?");
+            serialPort.Write("?");
             rawData.Text = serialPort.ReadExisting();
-            communicationState.Content = "pobrano Pakiet";*/
+            communicationState.Content = "pobrano Pakiet";
 
-            rawData.Text = "{" +
+            /*rawData.Text = "{" +
                 "\"distanceSensor1\":\"off\"," +
                 "\"distanceSensor2\":\"off\"," +
                 "\"distanceSensor3\":\"off\"," +
                 "\"distanceSensor4\":\"off\"," +
                 "\"colorSensor1\":\"off\"," +
                 "\"colorSensor2\":\"off\"" +
-                "}";
+                "}";*/
 
 
+            if(rawData.Text != "")
+            {
+                try
+                {
+                    appData = JsonSerializer.Deserialize<AppData>(rawData.Text);
+                    distanceSensorDisplay1.Text = appData.distanceSensor1;
+                    distanceSensorDisplay2.Text = appData.distanceSensor2;
+                    distanceSensorDisplay3.Text = appData.distanceSensor3;
+                    distanceSensorDisplay4.Text = appData.distanceSensor4;
 
-            appData = JsonSerializer.Deserialize<AppData>(rawData.Text);
+                    colorSensorDisplay1.Text = appData.colorSensor1;
+                    colorSensorDisplay2.Text = appData.colorSensor2;
 
-            distanceSensorDisplay1.Text = appData.distanceSensor1;
-            distanceSensorDisplay2.Text = appData.distanceSensor2;
-            distanceSensorDisplay3.Text = appData.distanceSensor3;
-            distanceSensorDisplay4.Text = appData.distanceSensor4;
+                }
+                catch
+                {
+                    outputDisplay.Text = "stravono pojedyćzny pakiet";
+                }
 
-            colorSensorDisplay1.Text = appData.colorSensor1;
-            colorSensorDisplay2.Text = appData.colorSensor2;
+                
 
-            if(appData.distanceSensor1 == "off")
+            }
+            
+
+            if(appData.distanceSensor1 == "0")
             {
                 distanceSensorDisplay1.Background = Brushes.Gray;
             }
@@ -110,32 +123,32 @@ namespace Quality_Control
             {
                 distanceSensorDisplay1.Background = Brushes.Green;
             }
-            if (appData.distanceSensor2 == "off")
+            if (appData.distanceSensor2 == "0")
             {
                 distanceSensorDisplay2.Background = Brushes.Gray;
             }
             else
             {
-                distanceSensorDisplay1.Background = Brushes.Green;
+                distanceSensorDisplay2.Background = Brushes.Green;
             }
-            if (appData.distanceSensor3 == "off")
+            if (appData.distanceSensor3 == "0")
             {
                 distanceSensorDisplay3.Background = Brushes.Gray;
             }
             else
             {
-                distanceSensorDisplay1.Background = Brushes.Green;
+                distanceSensorDisplay3.Background = Brushes.Green;
             }
-            if (appData.distanceSensor4 == "off")
+            if (appData.distanceSensor4 == "0")
             {
                 distanceSensorDisplay4.Background = Brushes.Gray;
             }
             else
             {
-                distanceSensorDisplay1.Background = Brushes.Green;
+                distanceSensorDisplay4.Background = Brushes.Green;
             }
 
-            if (appData.colorSensor1 == "off")
+            if (appData.colorSensor1 == "0")
             {
                 colorSensorDisplay1.Background = Brushes.Black;
                 colorSensorDisplay1.Foreground = Brushes.White;
@@ -146,7 +159,7 @@ namespace Quality_Control
                 colorSensorDisplay1.Background = Brushes.White;
                 colorSensorDisplay1.Foreground = Brushes.Black;
             }
-            if (appData.colorSensor2 == "off")
+            if (appData.colorSensor2 == "0")
             {
                 colorSensorDisplay2.Background = Brushes.Black;
                 colorSensorDisplay2.Foreground = Brushes.White;

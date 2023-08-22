@@ -133,7 +133,21 @@
 
                         <StackPanel>
                             <Label Style="{StaticResource Label}">Surowy pakiet:</Label>
-                            <TextBlock Margin="10" x:Name="rawData" TextWrapping="Wrap" Foreground="White">{123:23}</TextBlock>
+                            <TextBlock Margin="10" x:Name="rawData" TextWrapping="Wrap" Foreground="White"></TextBlock>
+                        </StackPanel>
+                    </Border>
+
+                    <Border CornerRadius="10" Margin="0,10">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Color="#5F7ADB" Offset="0.25" />
+                                <GradientStop Color="#A2B2EE" Offset="0.75" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+
+                        <StackPanel>
+                            <Label Style="{StaticResource Label}">Logi:</Label>
+                            <TextBlock Margin="10" x:Name="outputDisplay" TextWrapping="Wrap" Foreground="White"></TextBlock>
                         </StackPanel>
                     </Border>
 
