@@ -8,6 +8,8 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation.Peers;
+using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -16,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Quality_Control
 {
@@ -33,26 +36,40 @@ namespace Quality_Control
             serialPort = new SerialPort();
             InitializeComponent();
             InitializeSerialPorts();
-
-
-            /*Thread thread = new Thread(keyboardInterupt);
-            thread.SetApartmentState(ApartmentState.STA);
-            thread.Start();*/
+            
         }
 
         public void keyboardHandler(object slander, KeyEventArgs e)
         {
-            switch (e.Key)
+            if(motorCheckBox1.IsChecked == true)
             {
-                case Key.Up:
-                    appData.motorOutput1 += 10;
-                    motorOutputDisplay1.Value += 10;
-                    break;
-                case Key.Down:
-                    appData.motorOutput1 -= 10;
-                    motorOutputDisplay1.Value -= 10;
-                    break;
-            }   
+                switch (e.Key)
+                {
+                    case Key.W:
+                        appData.motorOutput1 += 10;
+                        motorOutputDisplay1.Value += 10;
+                        break;
+                    case Key.S:
+                        appData.motorOutput1 -= 10;
+                        motorOutputDisplay1.Value -= 10;
+                        break;
+                }
+            }
+            if (motorCheckBox2.IsChecked == true)
+            {
+                switch (e.Key)
+                {
+                    case Key.W:
+                        appData.motorOutput2 += 10;
+                        motorOutputDisplay2.Value += 10;
+                        break;
+                    case Key.S:
+                        appData.motorOutput2 -= 10;
+                        motorOutputDisplay2.Value -= 10;
+                        break;
+                }
+            }
+
         }
 
         private void InitializeSerialPorts()
@@ -74,6 +91,12 @@ namespace Quality_Control
             connectionState.Content = "połączono";
             communicationState.Content = "nie nawiązano";
         }
+        private void startCommunication(object sender, RoutedEventArgs e)
+        {
+
+            
+        }
+        
 
         private void getPacket(object sender, RoutedEventArgs e)
         {
@@ -81,33 +104,35 @@ namespace Quality_Control
             rawData.Text = serialPort.ReadExisting();
             communicationState.Content = "pobrano Pakiet";
 
-            /*rawData.Text = "{" +
-                "\"distanceSensor1\":\"off\"," +
-                "\"distanceSensor2\":\"off\"," +
-                "\"distanceSensor3\":\"off\"," +
-                "\"distanceSensor4\":\"off\"," +
-                "\"colorSensor1\":\"off\"," +
-                "\"colorSensor2\":\"off\"" +
-                "}";*/
-
-
             if(rawData.Text != "")
             {
                 try
                 {
                     appData = JsonSerializer.Deserialize<AppData>(rawData.Text);
-                    distanceSensorDisplay1.Text = appData.distanceSensor1;
-                    distanceSensorDisplay2.Text = appData.distanceSensor2;
-                    distanceSensorDisplay3.Text = appData.distanceSensor3;
-                    distanceSensorDisplay4.Text = appData.distanceSensor4;
 
-                    colorSensorDisplay1.Text = appData.colorSensor1;
-                    colorSensorDisplay2.Text = appData.colorSensor2;
+                    if(appData.distanceSensor1 == "0") distanceSensorDisplay1.Text = "off";
+                    else distanceSensorDisplay1.Text = "on";
+
+                    if(appData.distanceSensor2 == "0") distanceSensorDisplay2.Text = "off";
+                    else distanceSensorDisplay2.Text = "on";
+
+                    if (appData.distanceSensor3 == "0") distanceSensorDisplay3.Text = "off";
+                    else distanceSensorDisplay3.Text = "on";
+                    
+                    if(appData.distanceSensor4 == "0") distanceSensorDisplay4.Text = "off";
+                    else distanceSensorDisplay4.Text = "on";
+
+                    if (appData.colorSensor1 == "0") colorSensorDisplay1.Text= "off";
+                    else colorSensorDisplay1.Text = "on";
+
+                    if (appData.colorSensor2 == "0") colorSensorDisplay2.Text = "off";
+                    else colorSensorDisplay2.Text = "on";
+                    
 
                 }
                 catch
                 {
-                    outputDisplay.Text = "stravono pojedyćzny pakiet";
+                    outputDisplay.Text = "stravono pojedyczny pakiet";
                 }
 
                 
@@ -118,6 +143,7 @@ namespace Quality_Control
             if(appData.distanceSensor1 == "0")
             {
                 distanceSensorDisplay1.Background = Brushes.Gray;
+                
             }
             else
             {
@@ -170,6 +196,11 @@ namespace Quality_Control
                 colorSensorDisplay2.Background = Brushes.White;
                 colorSensorDisplay2.Foreground = Brushes.Black;
             }
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }
