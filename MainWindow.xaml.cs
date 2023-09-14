@@ -105,6 +105,11 @@ namespace Quality_Control
 
             
         }
+
+        private static void getPacket2()
+        {
+
+        }
         
 
         private void getPacket(object sender, RoutedEventArgs e)
