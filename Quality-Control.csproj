@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="Assets\backgraund.jpg" />
+    <None Remove="assets\icon.jpg" />
     <None Remove="Assets\main_sensors.png" />
     <None Remove="Assets\qr.png" />
     <None Remove="assets\sensors.png" />
@@ -26,6 +27,12 @@
 
   <ItemGroup>
     <PackageReference Include="System.IO.Ports" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="assets\icon.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

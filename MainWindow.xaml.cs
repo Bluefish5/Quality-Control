@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.IO.Ports;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -85,11 +86,19 @@ namespace Quality_Control
 
         private void openSerialPort(object sender, RoutedEventArgs e)
         {
-            serialPort.PortName = portSelectionBox.Text;
-            serialPort.Open();
-            selectedPort.Content = serialPort.PortName;
-            connectionState.Content = "połączono";
-            communicationState.Content = "nie nawiązano";
+            if(portSelectionBox.Text == "")
+            {
+                MessageBox.Show("Nie wyrbano portu szeregowego. Wybierz port i spróbuj jeszcze raz.");
+            }
+            else
+            {
+                serialPort.PortName = portSelectionBox.Text;
+                serialPort.Open();
+                selectedPort.Content = serialPort.PortName;
+                connectionState.Content = "połączono";
+                communicationState.Content = "nie nawiązano";
+            }
+            
         }
         private void startCommunication(object sender, RoutedEventArgs e)
         {
@@ -100,101 +109,108 @@ namespace Quality_Control
 
         private void getPacket(object sender, RoutedEventArgs e)
         {
-            serialPort.Write("?");
-            rawData.Text = serialPort.ReadExisting();
-            communicationState.Content = "pobrano Pakiet";
-
-            if(rawData.Text != "")
+            if (portSelectionBox.Text == "")
             {
-                try
+                MessageBox.Show("Nie wyrbano portu szeregowego. Wybierz port i spróbuj jeszcze raz.");
+            }
+            else
+            {
+                serialPort.Write("?");
+                rawData.Text = serialPort.ReadExisting();
+                communicationState.Content = "pobrano Pakiet";
+
+                if (rawData.Text != "")
                 {
-                    appData = JsonSerializer.Deserialize<AppData>(rawData.Text);
+                    try
+                    {
+                        appData = JsonSerializer.Deserialize<AppData>(rawData.Text);
 
-                    if(appData.distanceSensor1 == "0") distanceSensorDisplay1.Text = "off";
-                    else distanceSensorDisplay1.Text = "on";
+                        if (appData.distanceSensor1 == "0") distanceSensorDisplay1.Text = "off";
+                        else distanceSensorDisplay1.Text = "on";
 
-                    if(appData.distanceSensor2 == "0") distanceSensorDisplay2.Text = "off";
-                    else distanceSensorDisplay2.Text = "on";
+                        if (appData.distanceSensor2 == "0") distanceSensorDisplay2.Text = "off";
+                        else distanceSensorDisplay2.Text = "on";
 
-                    if (appData.distanceSensor3 == "0") distanceSensorDisplay3.Text = "off";
-                    else distanceSensorDisplay3.Text = "on";
-                    
-                    if(appData.distanceSensor4 == "0") distanceSensorDisplay4.Text = "off";
-                    else distanceSensorDisplay4.Text = "on";
+                        if (appData.distanceSensor3 == "0") distanceSensorDisplay3.Text = "off";
+                        else distanceSensorDisplay3.Text = "on";
 
-                    if (appData.colorSensor1 == "0") colorSensorDisplay1.Text= "off";
-                    else colorSensorDisplay1.Text = "on";
+                        if (appData.distanceSensor4 == "0") distanceSensorDisplay4.Text = "off";
+                        else distanceSensorDisplay4.Text = "on";
 
-                    if (appData.colorSensor2 == "0") colorSensorDisplay2.Text = "off";
-                    else colorSensorDisplay2.Text = "on";
-                    
+                        if (appData.colorSensor1 == "0") colorSensorDisplay1.Text = "off";
+                        else colorSensorDisplay1.Text = "on";
+
+                        if (appData.colorSensor2 == "0") colorSensorDisplay2.Text = "off";
+                        else colorSensorDisplay2.Text = "on";
+
+
+                    }
+                    catch
+                    {
+                        outputDisplay.Text = "stravono pojedyczny pakiet";
+                    }
+
+
 
                 }
-                catch
+
+
+                if (appData.distanceSensor1 == "0")
                 {
-                    outputDisplay.Text = "stravono pojedyczny pakiet";
+                    distanceSensorDisplay1.Background = Brushes.Gray;
+
+                }
+                else
+                {
+                    distanceSensorDisplay1.Background = Brushes.Green;
+                }
+                if (appData.distanceSensor2 == "0")
+                {
+                    distanceSensorDisplay2.Background = Brushes.Gray;
+                }
+                else
+                {
+                    distanceSensorDisplay2.Background = Brushes.Green;
+                }
+                if (appData.distanceSensor3 == "0")
+                {
+                    distanceSensorDisplay3.Background = Brushes.Gray;
+                }
+                else
+                {
+                    distanceSensorDisplay3.Background = Brushes.Green;
+                }
+                if (appData.distanceSensor4 == "0")
+                {
+                    distanceSensorDisplay4.Background = Brushes.Gray;
+                }
+                else
+                {
+                    distanceSensorDisplay4.Background = Brushes.Green;
                 }
 
-                
+                if (appData.colorSensor1 == "0")
+                {
+                    colorSensorDisplay1.Background = Brushes.Black;
+                    colorSensorDisplay1.Foreground = Brushes.White;
 
-            }
-            
+                }
+                else
+                {
+                    colorSensorDisplay1.Background = Brushes.White;
+                    colorSensorDisplay1.Foreground = Brushes.Black;
+                }
+                if (appData.colorSensor2 == "0")
+                {
+                    colorSensorDisplay2.Background = Brushes.Black;
+                    colorSensorDisplay2.Foreground = Brushes.White;
 
-            if(appData.distanceSensor1 == "0")
-            {
-                distanceSensorDisplay1.Background = Brushes.Gray;
-                
-            }
-            else
-            {
-                distanceSensorDisplay1.Background = Brushes.Green;
-            }
-            if (appData.distanceSensor2 == "0")
-            {
-                distanceSensorDisplay2.Background = Brushes.Gray;
-            }
-            else
-            {
-                distanceSensorDisplay2.Background = Brushes.Green;
-            }
-            if (appData.distanceSensor3 == "0")
-            {
-                distanceSensorDisplay3.Background = Brushes.Gray;
-            }
-            else
-            {
-                distanceSensorDisplay3.Background = Brushes.Green;
-            }
-            if (appData.distanceSensor4 == "0")
-            {
-                distanceSensorDisplay4.Background = Brushes.Gray;
-            }
-            else
-            {
-                distanceSensorDisplay4.Background = Brushes.Green;
-            }
-
-            if (appData.colorSensor1 == "0")
-            {
-                colorSensorDisplay1.Background = Brushes.Black;
-                colorSensorDisplay1.Foreground = Brushes.White;
-
-            }
-            else
-            {
-                colorSensorDisplay1.Background = Brushes.White;
-                colorSensorDisplay1.Foreground = Brushes.Black;
-            }
-            if (appData.colorSensor2 == "0")
-            {
-                colorSensorDisplay2.Background = Brushes.Black;
-                colorSensorDisplay2.Foreground = Brushes.White;
-
-            }
-            else
-            {
-                colorSensorDisplay2.Background = Brushes.White;
-                colorSensorDisplay2.Foreground = Brushes.Black;
+                }
+                else
+                {
+                    colorSensorDisplay2.Background = Brushes.White;
+                    colorSensorDisplay2.Foreground = Brushes.Black;
+                }
             }
 
         }

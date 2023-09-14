@@ -8,7 +8,8 @@
         KeyDown="keyboardHandler"
         Title="Quality Control" Height="620" Width="900"
         Background="Transparent"
-        FontFamily="Poppins Regular">
+        FontFamily="Poppins Regular"
+        Icon="/assets/icon.jpg">
     <Border Background="#1D2229">
 
         <Grid>
