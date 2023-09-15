@@ -29,8 +29,11 @@ namespace Quality_Control
     /// </summary>
     public partial class MainWindow : Window
     {
+        private System.Windows.Threading.DispatcherTimer gameTickTimer = new System.Windows.Threading.DispatcherTimer();
         public SerialPort serialPort;
         public AppData appData;
+        public bool stateOfTransfer = false;
+
 
         public MainWindow()
         {
@@ -38,7 +41,20 @@ namespace Quality_Control
             serialPort = new SerialPort();
             InitializeComponent();
             InitializeSerialPorts();
+            gameTickTimer.Tick += GameTickTimer_Tick;
+            gameTickTimer.Interval = TimeSpan.FromMilliseconds(1000);
+            gameTickTimer.IsEnabled = true;
 
+        }
+
+        private void GameTickTimer_Tick(object? sender, EventArgs e)
+        {
+            if(stateOfTransfer)
+            {
+                getPacket();
+                refreshUi();
+            }
+            
         }
 
         public void keyboardHandler(object slander, KeyEventArgs e)
@@ -103,14 +119,7 @@ namespace Quality_Control
         }
         private async void startCommunication(object sender, RoutedEventArgs e)
         {
-            while (true)
-            {
-                await Task.Run(() =>
-                {
-                    getPacket();
-                });
-                Task.Delay(2000);
-            }
+            stateOfTransfer = true;
         }
         private void refreshUi()
         {
