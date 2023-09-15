@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
@@ -37,21 +38,21 @@ namespace Quality_Control
             serialPort = new SerialPort();
             InitializeComponent();
             InitializeSerialPorts();
-            
+
         }
 
         public void keyboardHandler(object slander, KeyEventArgs e)
         {
-            if(motorCheckBox1.IsChecked == true)
+            if (motorCheckBox1.IsChecked == true)
             {
                 switch (e.Key)
                 {
                     case Key.W:
-                        appData.motorOutput1 += 10;
+                        appData.motorOutputs[0] += 10;
                         motorOutputDisplay1.Value += 10;
                         break;
                     case Key.S:
-                        appData.motorOutput1 -= 10;
+                        appData.motorOutputs[1] -= 10;
                         motorOutputDisplay1.Value -= 10;
                         break;
                 }
@@ -61,11 +62,11 @@ namespace Quality_Control
                 switch (e.Key)
                 {
                     case Key.W:
-                        appData.motorOutput2 += 10;
+                        appData.motorOutputs[0] += 10;
                         motorOutputDisplay2.Value += 10;
                         break;
                     case Key.S:
-                        appData.motorOutput2 -= 10;
+                        appData.motorOutputs[1] -= 10;
                         motorOutputDisplay2.Value -= 10;
                         break;
                 }
@@ -81,12 +82,12 @@ namespace Quality_Control
             {
                 portSelectionBox.Items.Add(port);
             }
-            
+
         }
 
         private void openSerialPort(object sender, RoutedEventArgs e)
         {
-            if(portSelectionBox.Text == "")
+            if (portSelectionBox.Text == "")
             {
                 MessageBox.Show("Nie wyrbano portu szeregowego. Wybierz port i spróbuj jeszcze raz.");
             }
@@ -98,156 +99,98 @@ namespace Quality_Control
                 connectionState.Content = "połączono";
                 communicationState.Content = "nie nawiązano";
             }
+
+        }
+        private async void startCommunication(object sender, RoutedEventArgs e)
+        {
+            while (true)
+            {
+                await Task.Run(() =>
+                {
+                    getPacket();
+                });
+                Task.Delay(2000);
+            }
+        }
+        private void refreshUi()
+        {
+            var mapValue = new Dictionary<int, string>();
+            mapValue[1] = "On";
+            mapValue[0] = "Off";
+
+            var mapColorValue = new Dictionary<int, SolidColorBrush>();
+            mapColorValue[1] = Brushes.Green;
+            mapColorValue[0] = Brushes.Gray;
+
+            distanceSensorDisplay1.Text = mapValue[appData.distanceSensors[0]];
+            distanceSensorDisplay2.Text = mapValue[appData.distanceSensors[1]];
+            distanceSensorDisplay3.Text = mapValue[appData.distanceSensors[2]];
+            distanceSensorDisplay4.Text = mapValue[appData.distanceSensors[3]];
+
+            colorSensorDisplay1.Text = mapValue[appData.colorSensors[0]];
+            colorSensorDisplay2.Text = mapValue[appData.colorSensors[1]];
+
+            distanceSensorDisplay1.Background = mapColorValue[appData.distanceSensors[0]];
+            distanceSensorDisplay2.Background = mapColorValue[appData.distanceSensors[1]];
+            distanceSensorDisplay3.Background = mapColorValue[appData.distanceSensors[2]];
+            distanceSensorDisplay4.Background = mapColorValue[appData.distanceSensors[3]];
+
+            colorSensorDisplay1.Background = mapColorValue[appData.colorSensors[0]];
+            colorSensorDisplay2.Background = mapColorValue[appData.colorSensors[1]];
+
+            rawData.Text = appData.rawData;
+
+        }
+        private void getPacket()
+        {
+            serialPort.Write("?");
+            appData.rawData = serialPort.ReadExisting();
+            if (appData.rawData != "")
+            {
+                try
+                {
+                    appData = JsonSerializer.Deserialize<AppData>(appData.rawData);
+                    
+                }
+                catch
+                {
+                    
+                }
+            }
+
+        }
+        private void getPacketClick(object sender, RoutedEventArgs e)
+        {
             
-        }
-        private void startCommunication(object sender, RoutedEventArgs e)
-        {
-
-            
-        }
-
-        private static void getPacket2()
-        {
-
-        }
-        
-
-        private void getPacket(object sender, RoutedEventArgs e)
-        {
             if (portSelectionBox.Text == "")
             {
                 MessageBox.Show("Nie wyrbano portu szeregowego. Wybierz port i spróbuj jeszcze raz.");
             }
             else
             {
-                serialPort.Write("?");
-                rawData.Text = serialPort.ReadExisting();
-                communicationState.Content = "pobrano Pakiet";
+                getPacket();
+                refreshUi();
 
-                if (rawData.Text != "")
-                {
-                    try
-                    {
-                        appData = JsonSerializer.Deserialize<AppData>(rawData.Text);
-
-                        if (appData.distanceSensor1 == "0") distanceSensorDisplay1.Text = "off";
-                        else distanceSensorDisplay1.Text = "on";
-
-                        if (appData.distanceSensor2 == "0") distanceSensorDisplay2.Text = "off";
-                        else distanceSensorDisplay2.Text = "on";
-
-                        if (appData.distanceSensor3 == "0") distanceSensorDisplay3.Text = "off";
-                        else distanceSensorDisplay3.Text = "on";
-
-                        if (appData.distanceSensor4 == "0") distanceSensorDisplay4.Text = "off";
-                        else distanceSensorDisplay4.Text = "on";
-
-                        if (appData.colorSensor1 == "0") colorSensorDisplay1.Text = "off";
-                        else colorSensorDisplay1.Text = "on";
-
-                        if (appData.colorSensor2 == "0") colorSensorDisplay2.Text = "off";
-                        else colorSensorDisplay2.Text = "on";
-
-
-                    }
-                    catch
-                    {
-                        outputDisplay.Text = "stravono pojedyczny pakiet";
-                    }
-
-
-
-                }
-
-
-                if (appData.distanceSensor1 == "0")
-                {
-                    distanceSensorDisplay1.Background = Brushes.Gray;
-
-                }
-                else
-                {
-                    distanceSensorDisplay1.Background = Brushes.Green;
-                }
-                if (appData.distanceSensor2 == "0")
-                {
-                    distanceSensorDisplay2.Background = Brushes.Gray;
-                }
-                else
-                {
-                    distanceSensorDisplay2.Background = Brushes.Green;
-                }
-                if (appData.distanceSensor3 == "0")
-                {
-                    distanceSensorDisplay3.Background = Brushes.Gray;
-                }
-                else
-                {
-                    distanceSensorDisplay3.Background = Brushes.Green;
-                }
-                if (appData.distanceSensor4 == "0")
-                {
-                    distanceSensorDisplay4.Background = Brushes.Gray;
-                }
-                else
-                {
-                    distanceSensorDisplay4.Background = Brushes.Green;
-                }
-
-                if (appData.colorSensor1 == "0")
-                {
-                    colorSensorDisplay1.Background = Brushes.Black;
-                    colorSensorDisplay1.Foreground = Brushes.White;
-
-                }
-                else
-                {
-                    colorSensorDisplay1.Background = Brushes.White;
-                    colorSensorDisplay1.Foreground = Brushes.Black;
-                }
-                if (appData.colorSensor2 == "0")
-                {
-                    colorSensorDisplay2.Background = Brushes.Black;
-                    colorSensorDisplay2.Foreground = Brushes.White;
-
-                }
-                else
-                {
-                    colorSensorDisplay2.Background = Brushes.White;
-                    colorSensorDisplay2.Foreground = Brushes.Black;
-                }
             }
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
+
+}
     public class AppData
     {
-        public string distanceSensor1 { get; set; }
-        public string distanceSensor2 { get; set; }
-        public string distanceSensor3 { get; set; }
-        public string distanceSensor4 { get; set; }
-        public string colorSensor1 { get; set; }
-        public string colorSensor2 { get; set; }
-
-        public int motorOutput1 { get; set; }   
-
-        public int motorOutput2 { get; set; }
+        public string rawData { get;set; }
+        public int[] distanceSensors { get; set; }
+        public int[] colorSensors { get; set; }
+        public int[] motorOutputs { get; set; }
         public AppData()
         {
-            distanceSensor1 = string.Empty;
-            distanceSensor2 = string.Empty;
-            distanceSensor3 = string.Empty;
-            distanceSensor4 = string.Empty;
-            colorSensor1 = string.Empty;
-            colorSensor2 = string.Empty;
-            motorOutput1 = 0;
-            motorOutput2 = 0;
-
+            rawData = "";   
+            distanceSensors = new int[4];
+            colorSensors = new int[2];
+            motorOutputs = new int[2];
         }
-    }
+        
+
+
 }
+
