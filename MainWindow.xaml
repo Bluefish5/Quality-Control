@@ -99,7 +99,7 @@
 
 
                             <Label Grid.Column="0" Grid.Row="1" Style="{StaticResource Label}">Bateria:</Label>
-                            <Label Grid.Column="1" Grid.Row="1" Style="{StaticResource Label}">0V / 0%</Label>
+                            <Label Grid.Column="1" Grid.Row="1" x:Name="batteryDisplay"  Style="{StaticResource Label}">0V / 0%</Label>
 
                             <Label Grid.Column="0" Grid.Row="2" Style="{StaticResource Label}">Temperatura:</Label>
                             <Label Grid.Column="1" Grid.Row="2" Style="{StaticResource Label}">0C°</Label>

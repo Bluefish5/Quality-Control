@@ -32,6 +32,7 @@ namespace Quality_Control
         private System.Windows.Threading.DispatcherTimer gameTickTimer = new System.Windows.Threading.DispatcherTimer();
         public SerialPort serialPort;
         public AppData appData;
+        public string rawDataTmp;
         public bool stateOfTransfer = false;
 
 
@@ -147,6 +148,8 @@ namespace Quality_Control
             colorSensorDisplay1.Background = mapColorValue[appData.colorSensors[0]];
             colorSensorDisplay2.Background = mapColorValue[appData.colorSensors[1]];
 
+            /*batteryDisplay.TextInput = appData.*/
+
             rawData.Text = appData.rawData;
 
         }
@@ -158,8 +161,9 @@ namespace Quality_Control
             {
                 try
                 {
+                    rawDataTmp = appData.rawData;
                     appData = JsonSerializer.Deserialize<AppData>(appData.rawData);
-                    
+                    appData.rawData = rawDataTmp;
                 }
                 catch
                 {
