@@ -148,7 +148,10 @@ namespace Quality_Control
             colorSensorDisplay1.Background = mapColorValue[appData.colorSensors[0]];
             colorSensorDisplay2.Background = mapColorValue[appData.colorSensors[1]];
 
-            /*batteryDisplay.TextInput = appData.*/
+            batteryDisplay.Content = $"{appData.battery}V / {(float)appData.battery/25*100} %";
+            temperatureDisplay.Content = $"{appData.temperature} C*";
+
+            
 
             rawData.Text = appData.rawData;
 
@@ -195,7 +198,9 @@ namespace Quality_Control
         public int[] distanceSensors { get; set; }
         public int[] colorSensors { get; set; }
         public int[] motorOutputs { get; set; }
-        public AppData()
+        public int battery { get; set; }
+        public int temperature { get; set; }
+    public AppData()
         {
             rawData = "";   
             distanceSensors = new int[4];
