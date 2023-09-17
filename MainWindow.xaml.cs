@@ -41,7 +41,6 @@ namespace Quality_Control
             appData = new AppData();
             serialPort = new SerialPort();
             InitializeComponent();
-            InitializeSerialPorts();
             gameTickTimer.Tick += GameTickTimer_Tick;
             gameTickTimer.Interval = TimeSpan.FromMilliseconds(1000);
             gameTickTimer.IsEnabled = true;
@@ -87,17 +86,6 @@ namespace Quality_Control
                         motorOutputDisplay2.Value -= 10;
                         break;
                 }
-            }
-
-        }
-
-        private void InitializeSerialPorts()
-        {
-
-            string[] ports = SerialPort.GetPortNames();
-            foreach (var port in ports)
-            {
-                portSelectionBox.Items.Add(port);
             }
 
         }
@@ -189,6 +177,25 @@ namespace Quality_Control
 
             }
         }
+
+        private void refreshSerialPorts(object sender, RoutedEventArgs e)
+        {
+
+            string[] ports = SerialPort.GetPortNames();
+            
+            if (!portSelectionBox.Items.IsEmpty)
+            {
+                portSelectionBox.Items.Clear();
+            }
+
+            foreach (var port in ports)
+            {
+                portSelectionBox.Items.Add(port);
+            }
+
+        }
+
+        
     }
 
 }

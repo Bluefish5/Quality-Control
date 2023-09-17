@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Quality_Control"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         KeyDown="keyboardHandler"
         Title="Quality Control" Height="620" Width="900"
@@ -32,12 +33,10 @@
 
                         <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
                                 <RowDefinition/>
                                 <RowDefinition/>
                                 <RowDefinition/>
@@ -45,8 +44,13 @@
 
                             </Grid.RowDefinitions>
                             <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource Title}">Wybierz port:</Label>
-                        <ComboBox x:Name="portSelectionBox" Grid.Row="1" Grid.Column="0" Margin="5,0"></ComboBox>
-                        <Button Style="{StaticResource Button}" x:Name="openSerialPortButton" Grid.Row="1" Height="30" Grid.Column="1" Click="openSerialPort" Margin="5,0">Zatwierdz</Button>
+                        <WrapPanel Grid.Row="1" Grid.ColumnSpan="2">
+                                <ComboBox x:Name="portSelectionBox" ContextMenuOpening="refreshSerialPorts" Margin="5,0" Width="80"></ComboBox>
+                                <Button Width="30" Style="{StaticResource Button}" Click="refreshSerialPorts">
+                                    <fa:FontAwesome Icon="Refresh"/>
+                                </Button>
+                            <Button Style="{StaticResource Button}" x:Name="openSerialPortButton" Height="30"  Click="openSerialPort" Margin="5,0">Zatwierdz</Button>
+                        </WrapPanel>
                         <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource Label}" >Wybrany port:</Label>
                         <Label x:Name="selectedPort" Grid.Row="2" Grid.Column="1" Style="{StaticResource Label}">brak</Label>
                         <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource Label}">Stan połączenia:</Label>
