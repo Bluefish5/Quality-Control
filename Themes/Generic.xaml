@@ -1,0 +1,34 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Quality_Control.CustomControls">
+
+
+    <Style TargetType="{x:Type local:ClockDisplay}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ClockDisplay}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+
+                        <Grid RenderTransformOrigin="0.5,0.5">
+                            <Grid.RenderTransform>
+                                <RotateTransform Angle="90"/>
+                            </Grid.RenderTransform>
+                            <Line Panel.ZIndex="2" Stroke="Black" x:Name="arrow" StrokeThickness="2" VerticalAlignment="Center" HorizontalAlignment="Center" X1="0" X2="-40"/>
+                            <Ellipse Panel.ZIndex="1" Stroke="#fefefc" StrokeThickness="2" Fill="#71BCFC" Width="100" Height="100"/>
+                        </Grid>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
+
+
+
+                
+
+            

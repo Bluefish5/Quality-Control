@@ -139,7 +139,13 @@ namespace Quality_Control
             batteryDisplay.Content = $"{appData.battery}V / {(float)appData.battery/25*100} %";
             temperatureDisplay.Content = $"{appData.temperature} C*";
 
-            
+            leftEncoderDisplay.angle = appData.temperature;
+            rightEncoderDisplay.angle = appData.temperature;
+            leftEncoderDisplay.updateArrowAngle();
+            rightEncoderDisplay.updateArrowAngle();
+
+
+
 
             rawData.Text = appData.rawData;
 

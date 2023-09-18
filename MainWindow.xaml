@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Quality_Control"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:custom="clr-namespace:Quality_Control.CustomControls"
         mc:Ignorable="d"
         KeyDown="keyboardHandler"
-        Title="Quality Control" Height="620" Width="900"
+        Title="Quality Control" Height="680" Width="1000"
         Background="Transparent"
         FontFamily="Poppins Regular"
         Icon="/assets/icon.jpg">
@@ -123,7 +124,7 @@
                         </StackPanel>
                     </Border>
 
-                    <Border CornerRadius="10" Margin="0,10"  Background="#363D4A">
+                    <Border CornerRadius="10" Background="#363D4A">
                         
 
                         <StackPanel>
@@ -141,7 +142,7 @@
             <Border Grid.Column="1" Grid.Row="1" BorderBrush="Silver" BorderThickness="1">
                 <StackPanel Margin="10,10">
 
-                    <Border CornerRadius="10"  Background="#363D4A">
+                    <Border CornerRadius="10" Margin="0,0,0,10" Padding="0,0,0,10" Background="#363D4A">
                         
                         <StackPanel>
 
@@ -163,7 +164,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                        <Rectangle Margin="0,0,0,10" Height="400" Width="400"  Grid.RowSpan="4" Grid.ColumnSpan="4"  RadiusX="20" RadiusY="20">
+                        <Rectangle Margin="0,0,0,0" Height="400" Width="400"  Grid.RowSpan="4" Grid.ColumnSpan="4"  RadiusX="20" RadiusY="20">
                             
                             <Rectangle.Fill>
                                 <ImageBrush ImageSource="assets/sensors.png"/>
@@ -186,8 +187,23 @@
                 </Border>
 
                     <Border CornerRadius="10"  Background="#363D4A">
-                        <Grid>
-                            
+                        <Grid Margin="0,10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Style="{StaticResource Title}" Grid.Column="0" Grid.Row="0">Prawy Enkoder:</Label>
+                            <Label Style="{StaticResource Title}" Grid.Column="1" Grid.Row="0">Lewy Enkoder:</Label>
+
+
+                            <custom:ClockDisplay x:Name="leftEncoderDisplay" Grid.Column="0" Grid.Row="1" Margin="0,10"></custom:ClockDisplay>
+                            <custom:ClockDisplay x:Name="rightEncoderDisplay" Grid.Column="1" Grid.Row="1" Margin="0,10"></custom:ClockDisplay>
+
                         </Grid>
                     </Border>
 
