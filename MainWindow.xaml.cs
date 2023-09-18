@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
+using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -29,11 +30,13 @@ namespace Quality_Control
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         private System.Windows.Threading.DispatcherTimer gameTickTimer = new System.Windows.Threading.DispatcherTimer();
         public SerialPort serialPort;
         public AppData appData;
         public string rawDataTmp;
         public bool stateOfTransfer = false;
+        public bool isPortSelected = false;
 
 
         public MainWindow()
@@ -103,12 +106,25 @@ namespace Quality_Control
                 selectedPort.Content = serialPort.PortName;
                 connectionState.Content = "połączono";
                 communicationState.Content = "nie nawiązano";
+                isPortSelected = true;
             }
 
         }
         private async void startCommunication(object sender, RoutedEventArgs e)
         {
-            stateOfTransfer = true;
+            if (!stateOfTransfer)
+            {
+                stateOfTransfer = true;
+                startCommunicationButton.Content = "Wyłącz komunikacje";
+                communicationState.Content = "transmisja danych";
+            }
+            else
+            {
+                stateOfTransfer = false;
+                startCommunicationButton.Content = "Włącz komunikacje";
+                communicationState.Content = "zatrzymano transmisje";
+            }
+            
         }
         private void refreshUi()
         {
@@ -117,7 +133,8 @@ namespace Quality_Control
             mapValue[0] = "Off";
 
             var mapColorValue = new Dictionary<int, SolidColorBrush>();
-            mapColorValue[1] = Brushes.Green;
+            
+            mapColorValue[1] = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 115, 242, 128)); ;
             mapColorValue[0] = Brushes.Gray;
 
             distanceSensorDisplay1.Text = mapValue[appData.distanceSensors[0]];
@@ -152,27 +169,35 @@ namespace Quality_Control
         }
         private void getPacket()
         {
-            serialPort.Write("?");
-            appData.rawData = serialPort.ReadExisting();
-            if (appData.rawData != "")
-            {
-                try
+            if (isPortSelected)
+            { 
+                serialPort.Write("?");
+                appData.rawData = serialPort.ReadExisting();
+                if (appData.rawData != "")
                 {
-                    rawDataTmp = appData.rawData;
-                    appData = JsonSerializer.Deserialize<AppData>(appData.rawData);
-                    appData.rawData = rawDataTmp;
-                }
-                catch
-                {
+                    try
+                    {
+                        rawDataTmp = appData.rawData;
+                        appData = JsonSerializer.Deserialize<AppData>(appData.rawData);
+                        appData.rawData = rawDataTmp;
+                    }
+                    catch
+                    {
                     
+                    }
                 }
+            }
+            else
+            {
+                stateOfTransfer = false;
+                MessageBox.Show("Nie wyrbano portu szeregowego. Wybierz port i spróbuj jeszcze raz.");
             }
 
         }
         private void getPacketClick(object sender, RoutedEventArgs e)
         {
             
-            if (portSelectionBox.Text == "")
+            if (!isPortSelected)
             {
                 MessageBox.Show("Nie wyrbano portu szeregowego. Wybierz port i spróbuj jeszcze raz.");
             }
