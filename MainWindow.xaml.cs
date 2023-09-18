@@ -42,7 +42,7 @@ namespace Quality_Control
             serialPort = new SerialPort();
             InitializeComponent();
             gameTickTimer.Tick += GameTickTimer_Tick;
-            gameTickTimer.Interval = TimeSpan.FromMilliseconds(1000);
+            gameTickTimer.Interval = TimeSpan.FromMilliseconds(500);
             gameTickTimer.IsEnabled = true;
 
         }

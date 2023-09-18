@@ -183,9 +183,16 @@
 
                 </Grid>
                 </StackPanel>
+                </Border>
+
+                    <Border CornerRadius="10"  Background="#363D4A">
+                        <Grid>
+                            
+                        </Grid>
                     </Border>
 
-                    
+
+
 
                 </StackPanel>
                 </Border>
@@ -198,7 +205,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -209,11 +216,11 @@
 
 
                         <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Style="{StaticResource Label}">starter</Label>
-                        <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource Label}">kontroler</Label>
+                        
                         <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Style="{StaticResource Label}">klawiatura</Label>
 
                         <RadioButton Margin="10" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" ></RadioButton>
-                        <RadioButton Margin="10" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" ></RadioButton>
+                        
                         <RadioButton Margin="10" IsChecked="True" Grid.Row="2"  Grid.Column="2" HorizontalAlignment="Center" ></RadioButton>
 
 
