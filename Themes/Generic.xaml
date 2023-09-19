@@ -13,10 +13,7 @@
                             BorderThickness="{TemplateBinding BorderThickness}">
 
                         <Grid RenderTransformOrigin="0.5,0.5">
-                            <Grid.RenderTransform>
-                                <RotateTransform Angle="90"/>
-                            </Grid.RenderTransform>
-                            <Line Panel.ZIndex="2" Stroke="Black" x:Name="arrow" StrokeThickness="2" VerticalAlignment="Center" HorizontalAlignment="Center" X1="0" X2="-40"/>
+                            <Line Panel.ZIndex="3" Stroke="Black" x:Name="arrow" StrokeThickness="2" VerticalAlignment="Center" HorizontalAlignment="Center" X1="0" X2="-40"/>
                             <Ellipse Panel.ZIndex="1" Stroke="#fefefc" StrokeThickness="2" Fill="#71BCFC" Width="100" Height="100"/>
                         </Grid>
 

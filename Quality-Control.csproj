@@ -12,11 +12,15 @@
     <None Remove="Assets\backgraund.jpg" />
     <None Remove="assets\icon.jpg" />
     <None Remove="Assets\main_sensors.png" />
+    <None Remove="assets\protractor.png" />
     <None Remove="Assets\qr.png" />
     <None Remove="assets\sensors.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="assets\protractor.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\qr.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
