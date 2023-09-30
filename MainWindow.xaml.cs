@@ -102,6 +102,7 @@ namespace Quality_Control
             else
             {
                 serialPort.PortName = portSelectionBox.Text;
+                serialPort.BaudRate = 115200;
                 serialPort.Open();
                 selectedPort.Content = serialPort.PortName;
                 connectionState.Content = "połączono";
@@ -170,8 +171,10 @@ namespace Quality_Control
         private void getPacket()
         {
             if (isPortSelected)
-            { 
-                serialPort.Write("?");
+            {
+                serialPort.Write("ping\n");
+
+
                 appData.rawData = serialPort.ReadExisting();
                 if (appData.rawData != "")
                 {
