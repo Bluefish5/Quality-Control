@@ -171,7 +171,8 @@ namespace Quality_Control
         {
             if (isPortSelected)
             { 
-                serialPort.Write("?");
+                serialPort.WriteLine("?");
+
                 appData.rawData = serialPort.ReadExisting();
                 if (appData.rawData != "")
                 {

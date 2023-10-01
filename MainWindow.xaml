@@ -245,7 +245,7 @@
                         
                         <StackPanel>
                             <Label Style="{StaticResource Title}">Repozytorum:</Label>
-                            <Image Source="/assets/qr.png" Height="150" Width="150"></Image>
+                            <Image Source="/assets/qr.png" Height="50" Width="50"></Image>
                             <TextBlock Margin="5" TextWrapping="Wrap" Foreground="White">https://github.com/Bluefish5/Quality-Control</TextBlock>
                         </StackPanel>
                     </Border>
