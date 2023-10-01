@@ -241,6 +241,63 @@
                     </StackPanel>
                     </Border>
 
+                    <Border CornerRadius="10"  Background="#363D4A" Margin="0,10">
+                        
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource Title}">Zasilanie:</Label>
+
+                            <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource Title}">Vesc:</Label>
+                            <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource Title}">OFF</Label>
+                            <Button Grid.Row="1" Grid.Column="2" Margin="5,5" Style="{StaticResource Button}" Click="vescOn" >ON</Button>
+                            <Button Grid.Row="1" Grid.Column="3" Margin="5,5" Style="{StaticResource Button}" Click="vescOff" >OFF</Button>
+
+                            
+                            
+                            <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource Title}">Analog:</Label>
+                            <Label Grid.Row="2" Grid.Column="1" Style="{StaticResource Title}">OFF</Label>
+                            <Button Grid.Row="2" Grid.Column="2" Margin="5,5" Style="{StaticResource Button}" Click="analogOn" >ON</Button>
+                            <Button Grid.Row="2" Grid.Column="3" Margin="5,5" Style="{StaticResource Button}" Click="analogOff" >OFF</Button>
+
+                            <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource Title}">Starter:</Label>
+                            <Label Grid.Row="3" Grid.Column="1" Style="{StaticResource Title}">OFF</Label>
+                            <Button Grid.Row="3" Grid.Column="2" Margin="5,5" Style="{StaticResource Button}" Click="starterOn" >ON</Button>
+                            <Button Grid.Row="3" Grid.Column="3" Margin="5,5" Style="{StaticResource Button}" Click="starterOff">OFF</Button>
+
+                            <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource Title}">Linie:</Label>
+                            <Label Grid.Row="4" Grid.Column="1" Style="{StaticResource Title}">OFF</Label>
+                            <Button Grid.Row="4" Grid.Column="2" Margin="5,5" Style="{StaticResource Button}" Click="lineOn" >ON</Button>
+                            <Button Grid.Row="4" Grid.Column="3" Margin="5,5" Style="{StaticResource Button}" Click="lineOff" >OFF</Button>
+
+                            <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource Title}">Cyfrowe:</Label>
+                            <Label Grid.Row="5" Grid.Column="1" Style="{StaticResource Title}">OFF</Label>
+                            <Button Grid.Row="5" Grid.Column="2" Margin="5,5" Style="{StaticResource Button}" Click="digitalOn">ON</Button>
+                            <Button Grid.Row="5" Grid.Column="3" Margin="5,5" Style="{StaticResource Button}" Click="digitalOff" >OFF</Button>
+
+                            <Label Grid.Row="6" Grid.Column="0" Style="{StaticResource Title}">Starter JP:</Label>
+                            <Label Grid.Row="6" Grid.Column="1" Style="{StaticResource Title}">OFF</Label>
+                            <Button Grid.Row="6" Grid.Column="2" Margin="5,5" Style="{StaticResource Button}" Click="starterJpOn" >ON</Button>
+                            <Button Grid.Row="6" Grid.Column="3" Margin="5,5" Style="{StaticResource Button}"  Click="starterJpOff">OFF</Button>
+
+                        </Grid>
+
+                    </Border>
+
                     <Border CornerRadius="10"  Background="#363D4A">
                         
                         <StackPanel>
@@ -249,6 +306,8 @@
                             <TextBlock Margin="5" TextWrapping="Wrap" Foreground="White">https://github.com/Bluefish5/Quality-Control</TextBlock>
                         </StackPanel>
                     </Border>
+                    
+                    
 
 
                 </StackPanel>

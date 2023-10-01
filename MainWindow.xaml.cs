@@ -229,7 +229,54 @@ namespace Quality_Control
 
         }
 
-        
+        private void vescOn(object sender, RoutedEventArgs e)
+        {
+            serialPort.Write("vescOn\n");
+        }
+        private void vescOff(object sender, RoutedEventArgs e)
+        {
+            serialPort.Write("vescOff\n");
+        }
+        private void analogOn(object sender, RoutedEventArgs e)
+        {
+            serialPort.Write("analogOn\n");
+        }
+        private void analogOff(object sender, RoutedEventArgs e)
+        {
+            serialPort.Write("analogOff\n");
+        }
+        private void starterOn(object sender, RoutedEventArgs e)
+        {
+            serialPort.Write("starterOn\n");
+        }
+        private void starterOff(object sender, RoutedEventArgs e)
+        {
+            serialPort.Write("starterOff\n");
+        }
+        private void lineOn(object sender, RoutedEventArgs e)
+        {
+            serialPort.Write("lineOn\n");
+        }
+        private void lineOff(object sender, RoutedEventArgs e)
+        {
+            serialPort.Write("lineOff\n");
+        }
+        private void digitalOn(object sender, RoutedEventArgs e)
+        {
+            serialPort.Write("digitalOn\n");
+        }
+        private void digitalOff(object sender, RoutedEventArgs e)
+        {
+            serialPort.Write("digitalOff\n");
+        }
+        private void starterJpOn(object sender, RoutedEventArgs e)
+        {
+            serialPort.Write("starterJpOn\n");
+        }
+        private void starterJpOff(object sender, RoutedEventArgs e)
+        {
+            serialPort.Write("starterJpOff\n");
+        }
     }
 
 }
