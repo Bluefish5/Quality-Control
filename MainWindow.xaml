@@ -241,7 +241,7 @@
                     </StackPanel>
                     </Border>
 
-                    <Border CornerRadius="10"  Background="#363D4A" Margin="0,10">
+                    <Border CornerRadius="10"  Background="#363D4A">
                         
                         <Grid Margin="5">
                             <Grid.ColumnDefinitions>
@@ -298,14 +298,7 @@
 
                     </Border>
 
-                    <Border CornerRadius="10"  Background="#363D4A">
-                        
-                        <StackPanel>
-                            <Label Style="{StaticResource Title}">Repozytorum:</Label>
-                            <Image Source="/assets/qr.png" Height="50" Width="50"></Image>
-                            <TextBlock Margin="5" TextWrapping="Wrap" Foreground="White">https://github.com/Bluefish5/Quality-Control</TextBlock>
-                        </StackPanel>
-                    </Border>
+                    
                     
                     
 
