@@ -4,6 +4,7 @@ using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
+using System.Net.Sockets;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.Json;
@@ -55,6 +56,7 @@ namespace Quality_Control
             if(stateOfTransfer)
             {
                 getPacket();
+                sendPacket();
                 refreshUi();
             }
             
@@ -167,6 +169,11 @@ namespace Quality_Control
 
             rawData.Text = appData.rawData;
 
+        }
+        private void sendPacket()
+        {
+            if (appData.motorOutputs[0] != 0) serialPort.Write("moveForward1\n");
+            if (appData.motorOutputs[1] != 0) serialPort.Write("moveForward2\n");
         }
         private void getPacket()
         {
